@@ -1,36 +1,37 @@
-h1 Twitter OAuth client library for Ruby
+h1. Twitter OAuth client library for Ruby
 
 To make authorized requests with the client library you'll need to [create a Twitter OAuth Application](http://twitter.com/oauth_clients/new).
 
 See [sinitter](http://github.com/moomerman/sinitter/tree/master) for a full website integration example.
 
-h2 Unauthorized request example
+h2. Unauthorized request example
 
-<pre><code>
-`client = TwitterOAuth::Client.new  
-puts client.show('moomerman')`
+<pre><code>client = TwitterOAuth::Client.new  
+puts client.show('moomerman')
 </code></pre>
 
-h2 Authorized request example
+h2. Authorized request example
 
-<pre><code>
-TwitterOAuth::Client::CLIENT_KEY = 'YOUR-CONSUMER-KEY'  
+<pre><code>TwitterOAuth::Client::CLIENT_KEY = 'YOUR-CONSUMER-KEY'  
 TwitterOAuth::Client::CLIENT_SECRET = 'YOUR-CONSUMER-SECRET'  
 
 client = TwitterOAuth::Client.new  
 request_token = client.request_token # store the request token somewhere for later  
-puts "redirect the user to '#{request_token.authorize_url}'"  
-=> redirect the user to 'http://twitter.com/oauth/authorize?oauth_token=TOKEN'  
+
+request_token.authorize_url
+=> http://twitter.com/oauth/authorize?oauth_token=TOKEN
 </code></pre>
 
-In your application your user would be redirected to Twitter to authorize the application.
+In your application your user would be redirected to Twitter to authorize the application at this point.
 
-<pre><code>
-access_token = client.login(
+<pre><code>access_token = client.login(
   request_token.token,
   request_token.secret
 )
+
 client.authorized?
 => true
+
+client.update('checking out the twitter_oauth library')
 </code></pre>
 
