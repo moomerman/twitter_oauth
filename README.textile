@@ -16,13 +16,14 @@ h2. Authorized request example
 TwitterOAuth::Client::CLIENT_SECRET = 'YOUR-CONSUMER-SECRET'  
 
 client = TwitterOAuth::Client.new  
-request_token = client.request_token # store the request token somewhere for later  
+request_token = client.request_token
 
 request_token.authorize_url
 => http://twitter.com/oauth/authorize?oauth_token=TOKEN
 </code></pre>
 
-In your application your user would be redirected to Twitter to authorize the application at this point.
+In your application your user would be redirected to Twitter to authorize the application at this point.  You'll need to store
+the request token (usually in the session) for later.
 
 <pre><code>access_token = client.login(
   request_token.token,
@@ -35,3 +36,11 @@ client.authorized?
 client.update('checking out the twitter_oauth library')
 </code></pre>
 
+Now if you keep hold of the access_token (usually in the database) for his user you won't need to re-authorize them next time.  Eg.
+
+<pre><code>access_token = @user.access_token # assuming user ivar
+client = TwitterOAuth::Client.new(:token => access_token.token, :secret => access_token.secret)
+
+client.authorized?
+=> true
+</code></pre>
