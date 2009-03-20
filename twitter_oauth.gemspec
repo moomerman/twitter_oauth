@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{twitter_oauth}
-  s.version = "0.1.2"
+  s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Richard Taylor"]
@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--inline-source", "--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{twitter_oauth}
-  s.rubygems_version = %q{1.3.0}
+  s.rubygems_version = %q{1.3.1}
   s.summary = %q{twitter_oauth is a Ruby library for talking to twitter using the new oauth method.}
 
   if s.respond_to? :specification_version then
