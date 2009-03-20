@@ -1,3 +1,7 @@
+require 'twitter_oauth/account'
+require 'twitter_oauth/statuses'
+require 'twitter_oauth/direct_messages'
+
 module TwitterOAuth
   class Client
   
@@ -7,7 +11,7 @@ module TwitterOAuth
       @secret = options[:secret]
     end
   
-    def login(token, secret)
+    def authorize(token, secret)
       request_token = OAuth::RequestToken.new(
         consumer, token, secret
       )
@@ -19,26 +23,6 @@ module TwitterOAuth
   
     def show(username = @username)
       oauth_response = access_token.get("/users/show/#{username}.json")
-      JSON.parse(oauth_response.body)
-    end
-  
-    def authorized?
-      oauth_response = access_token.get('/account/verify_credentials.json')
-      return oauth_response.class == Net::HTTPOK
-    end
-  
-    def friends
-      oauth_response = access_token.get('/statuses/friends_timeline.json')
-      JSON.parse(oauth_response.body)
-    end
-  
-    def update(message)
-      oauth_response = access_token.post('/statuses/update.json', :status => message)
-      JSON.parse(oauth_response.body)
-    end
-  
-    def message(user, text)
-      oauth_response = access_token.post('/direct_messages/new.format', :user => user, :text => text)
       JSON.parse(oauth_response.body)
     end
     

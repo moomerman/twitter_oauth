@@ -27,7 +27,7 @@ request_token.authorize_url
 In your application your user would be redirected to Twitter to authorize the application at this point.  You'll need to store
 the request token (usually in the session) for later.
 
-<pre><code>access_token = client.login(
+<pre><code>access_token = client.authorize(
   request_token.token,
   request_token.secret
 )
@@ -38,7 +38,7 @@ client.authorized?
 client.update('checking out the twitter_oauth library') # sends a twitter status update
 </code></pre>
 
-Now if you keep hold of the access_token (usually in the database) for his user you won't need to re-authorize them next time.  Eg.
+Now if you keep hold of the access_token (usually in the database) for this user you won't need to re-authorize them next time.
 
 <pre><code>access_token = @user.access_token # assuming user ivar
 client = TwitterOAuth::Client.new(:token => access_token.token, :secret => access_token.secret)
