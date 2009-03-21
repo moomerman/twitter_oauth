@@ -4,9 +4,10 @@ require 'twitter_oauth/direct_messages'
 
 module TwitterOAuth
   class Client
-  
+    
     def initialize(options = {})
-      @username = options[:username]
+      @consumer_key = options[:consumer_key]
+      @consumer_secret = options[:consumer_secret]
       @token = options[:token]
       @secret = options[:secret]
     end
@@ -21,7 +22,7 @@ module TwitterOAuth
       @access_token
     end
   
-    def show(username = @username)
+    def show(username)
       oauth_response = access_token.get("/users/show/#{username}.json")
       JSON.parse(oauth_response.body)
     end
@@ -33,8 +34,8 @@ module TwitterOAuth
     private
       def consumer
         @consumer ||= OAuth::Consumer.new(
-          CLIENT_KEY,
-          CLIENT_SECRET,
+          @consumer_key,
+          @consumer_secret,
           { :site=>"http://twitter.com" }
         )
       end

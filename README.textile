@@ -1,10 +1,14 @@
-h1. Twitter OAuth client library for Ruby
+h1. Twitter OAuth REST API client library for Ruby
 
 To make authorized requests with the client library you'll need to [create a Twitter OAuth Application](http://twitter.com/oauth_clients/new).
 
 See [sinitter](http://github.com/moomerman/sinitter/tree/master) for a full website integration example.
 
 h2. Unauthorized request example
+
+The Twitter API can be called to make public requests without needing any client credentials.
+Most methods will not work in this mode but some of them do.  An example to retrieve the public details
+about a Twitter user is below. 
 
 <pre><code>client = TwitterOAuth::Client.new  
 
@@ -14,10 +18,16 @@ puts client.show('twitter')
 
 h2. Authorized request example
 
-<pre><code>TwitterOAuth::Client::CLIENT_KEY = 'YOUR-CONSUMER-KEY'  
-TwitterOAuth::Client::CLIENT_SECRET = 'YOUR-CONSUMER-SECRET'  
+To use the full power of the Twitter API you need to authorize your application and a valid Twitter user via OAuth.
+An example showing how to update the status of an authorized user is below.
 
-client = TwitterOAuth::Client.new  
+Firstly we need to create an instance of the client with your application client credentials you have been given by Twitter
+when you set up your application.
+
+<pre><code>client = TwitterOAuth::Client.new(
+    :consumer_key => 'YOUR_APP_CONSUMER_KEY',
+    :consumer_secret => 'YOURA_APP_CONSUMER_SECRET'
+)
 request_token = client.request_token
 
 request_token.authorize_url
@@ -25,7 +35,7 @@ request_token.authorize_url
 </code></pre>
 
 In your application your user would be redirected to Twitter to authorize the application at this point.  You'll need to store
-the request token (usually in the session) for later.
+the request token (usually in the session) for later.  The code continues below assuming the user has authorized your application.
 
 <pre><code>access_token = client.authorize(
   request_token.token,
@@ -38,10 +48,15 @@ client.authorized?
 client.update('checking out the twitter_oauth library') # sends a twitter status update
 </code></pre>
 
-Now if you keep hold of the access_token (usually in the database) for this user you won't need to re-authorize them next time.
+Now if you keep hold of the access_token (usually in the database) for this user you won't need to re-authorize them next time.  When you create an instance of the client you can just pass in the access token and secret that you have stored.
 
-<pre><code>access_token = @user.access_token # assuming user ivar
-client = TwitterOAuth::Client.new(:token => access_token.token, :secret => access_token.secret)
+<pre><code>access_token = @user.access_token # assuming @user
+client = TwitterOAuth::Client.new(
+    :consumer_key => 'YOUR_CONSUMER_KEY',
+    :consumer_secret => 'YOUR-CONSUMER-SECRET',
+    :token => access_token.token, 
+    :secret => access_token.secret
+)
 
 client.authorized?
 => true
