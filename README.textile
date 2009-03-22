@@ -16,6 +16,15 @@ puts client.show('twitter')
 => => {"status"=>{"truncated"=>false, "favorited"=>false, "text"=>"Update on service issues http://tinyurl.com/ca872j", "id"=>1357776683, "in_reply_to_user_id"=>nil, "in_reply_to_status_id"=>nil, "source"=>"<a href=\"http://twitterfeed.com\">twitterfeed</a>", "created_at"=>"Fri Mar 20 01:17:35 +0000 2009"}, "name"=>"Twitter", "profile_sidebar_fill_color"=>"CDFFFF", "profile_sidebar_border_color"=>"8a6447", "profile_background_tile"=>false, "profile_link_color"=>"0000ff", "url"=>"http://twitter.com", "favourites_count"=>0, "id"=>783214, "description"=>"Always wondering what everyone's doing.", "profile_text_color"=>"000000", "protected"=>false, "utc_offset"=>-28800, "screen_name"=>"twitter", "profile_background_color"=>"9ae4e8", "time_zone"=>"Pacific Time (US & Canada)", "followers_count"=>469150, "profile_background_image_url"=>"http://static.twitter.com/images/themes/theme1/bg.gif", "friends_count"=>30, "statuses_count"=>290, "location"=>"San Francisco, CA", "profile_image_url"=>"http://s3.amazonaws.com/twitter_production/profile_images/75075164/twitter_bird_profile_normal.png", "created_at"=>"Tue Feb 20 14:35:54 +0000 2007"}
 </code></pre>
 
+You can also access to the search API which is available in either authorized or unauthorized modes.
+
+<pre><code>search = client.search('twitter')
+search.results.size => 20
+search.results.first.from_user => "josephpred"
+search.results.first.text
+=> "Useful public service Twitter account for those of you hitting Tahoe or just needing to cross the pass to Reno: @i80chains"
+</code></pre>
+
 h2. Authorized request example
 
 To use the full power of the Twitter API you need to authorize your application and a valid Twitter user via OAuth.
