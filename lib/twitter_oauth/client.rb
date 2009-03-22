@@ -1,6 +1,7 @@
 require 'twitter_oauth/account'
 require 'twitter_oauth/statuses'
 require 'twitter_oauth/direct_messages'
+require 'twitter_oauth/search'
 
 module TwitterOAuth
   class Client
