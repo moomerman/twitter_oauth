@@ -2,7 +2,7 @@ module TwitterOAuth
   class Client
     
     def friends
-      oauth_response = access_token.post("friends/ids.json")
+      oauth_response = access_token.post("/friends/ids.json")
       JSON.parse(oauth_response.body)
     end
     
