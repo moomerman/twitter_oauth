@@ -8,6 +8,12 @@ module TwitterOAuth
       return oauth_response.class == Net::HTTPOK
     end
     
+    # Returns client info
+    def info
+      oauth_response = access_token.get('/account/verify_credentials.json')
+      JSON.parse(oauth_response.body)
+    end
+    
     # Returns the remaining number of API requests available to the requesting user before the API limit is reached for the current hour.
     def rate_limit_status
       oauth_response = access_token.get('/account/rate_limit_status.json')

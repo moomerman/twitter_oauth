@@ -5,6 +5,7 @@ require 'twitter_oauth/search'
 require 'twitter_oauth/notifications'
 require 'twitter_oauth/blocks'
 require 'twitter_oauth/friendships'
+require 'twitter_oauth/user'
 
 module TwitterOAuth
   class Client
