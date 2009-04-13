@@ -13,5 +13,10 @@ module TwitterOAuth
       JSON.parse(oauth_response.body)
     end
     
+    def show(id)
+      oauth_response = access_token.get("/users/show/#{id}.json")
+      JSON.parse(oauth_response.body)
+    end
+    
   end
 end

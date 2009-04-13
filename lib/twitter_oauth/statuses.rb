@@ -8,14 +8,14 @@ module TwitterOAuth
     end
     
     # Returns the 20 most recent statuses posted by the authenticating user and that user's friends.
-    def friends_timeline
-      oauth_response = access_token.get('/statuses/friends_timeline.json')
+    def friends_timeline(rpp=20, page=1)
+      oauth_response = access_token.get("/statuses/friends_timeline.json?count=#{rpp}&page=#{page}")
       JSON.parse(oauth_response.body)
     end
     
     # Returns the 20 most recent statuses posted from the authenticating user.
-    def user
-      oauth_response = access_token.get('/statuses/user_timeline.json')
+    def user(page=1)
+      oauth_response = access_token.get("/statuses/user_timeline.json?page=#{page}")
       JSON.parse(oauth_response.body)
     end
     
@@ -32,8 +32,19 @@ module TwitterOAuth
     end
     
     # Returns the 20 most recent @replies (status updates prefixed with @username) for the authenticating user.
-    def replies
-      oauth_response = access_token.get('/statuses/replies.json')
+    def replies(page=1)
+      oauth_response = access_token.get("/statuses/mentions.json?page=#{page}")
+      JSON.parse(oauth_response.body)
+    end
+    
+    # alias
+    def mentions
+      replies
+    end
+    
+    # Destroys the status specified by the required ID parameter
+    def status_destroy(id)
+      oauth_response = access_token.post("/statuses/destroy/#{id}.json")
       JSON.parse(oauth_response.body)
     end
     
