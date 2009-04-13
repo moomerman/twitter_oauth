@@ -6,6 +6,7 @@ require 'twitter_oauth/notifications'
 require 'twitter_oauth/blocks'
 require 'twitter_oauth/friendships'
 require 'twitter_oauth/user'
+require 'twitter_oauth/favorites'
 
 module TwitterOAuth
   class Client
