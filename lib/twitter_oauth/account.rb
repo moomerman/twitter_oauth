@@ -20,5 +20,12 @@ module TwitterOAuth
       JSON.parse(oauth_response.body)
     end
     
+    # colors hash must contain at least one or more of the following keys :profile_background_color, :profile_text_color, :profile_link_color, :profile_sidebar_fill_color, :profile_sidebar_border_color 
+    # returns extended user info object
+    def update_profile_colors(colors)
+      oauth_response = access_token.post('/account/update_profile_colors.json', colors)
+      JSON.parse(oauth_response.body)
+    end
+    
   end
 end
