@@ -26,7 +26,7 @@ module TwitterOAuth
     # exists?.
     def exists?(a, b)
       oauth_response = access_token.get("/friendships/exists.json?user_a=#{a}&user_b=#{b}")
-      JSON.parse(oauth_response.body)
+      oauth_response.body.strip == 'true'
     end
     
   end
