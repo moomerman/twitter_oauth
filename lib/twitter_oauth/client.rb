@@ -28,6 +28,11 @@ module TwitterOAuth
       @secret = @access_token.secret
       @access_token
     end
+    
+    def authentication_request_token
+      consumer.options[:authorize_path] = '/oauth/authenticate'
+      request_token
+    end
   
     def show(username)
       oauth_response = access_token.get("/users/show/#{username}.json")
