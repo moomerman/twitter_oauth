@@ -1,4 +1,3 @@
-require 'mime/types'
 module TwitterOAuth
   class Client
     CRLF = "\r\n"
@@ -17,7 +16,7 @@ module TwitterOAuth
           body <<  "--#{boundary}#{CRLF}"
           
           if value.respond_to?(:read)
-            mime_type = ::MIME::Types.type_for(value.path)[0] || MIME::Types["application/octet-stream"][0]
+            mime_type = MIME::Types.type_for(value.path)[0] || MIME::Types["application/octet-stream"][0]
             body << "Content-Disposition: form-data; name=\"#{esc_key}\"; filename=\"#{File.basename(value.path)}\"#{CRLF}"
             body << "Content-Type: #{mime_type.simplified}#{CRLF*2}"
             body << value.read
