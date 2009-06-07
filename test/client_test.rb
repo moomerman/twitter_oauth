@@ -13,6 +13,19 @@ class ClientTest < Test::Unit::TestCase
       assert_kind_of TwitterOAuth::Client, @client
     end
 
+    context "authentication_request_token" do
+      setup do
+        @consumer = stub("oauth consumer", :options => {})
+        @client.stubs(:request_token)
+        @client.stubs(:consumer).returns(@consumer)
+      end
+
+      should "sets consumers authorize path" do
+        @client.authentication_request_token
+        assert_equal @client.consumer.options[:authorize_path], '/oauth/authenticate'
+      end
+    end
+
     context "when authorizing" do
       setup do
         @request_token = stub('a request token')
