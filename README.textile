@@ -37,7 +37,10 @@ when you set up your application.
     :consumer_key => 'YOUR_APP_CONSUMER_KEY',
     :consumer_secret => 'YOURA_APP_CONSUMER_SECRET'
 )
-request_token = client.request_token
+request_token = client.request_token(:oauth_callback => oauth_confirm_url)
+#:oauth_callback required for web apps, since oauth gem by default forse PIN-based flow 
+#( see http://groups.google.com/group/twitter-development-talk/browse_thread/thread/472500cfe9e7cdb9/848f834227d3e64d )
+
 
 request_token.authorize_url
 => http://twitter.com/oauth/authorize?oauth_token=TOKEN
@@ -48,7 +51,8 @@ the request token (usually in the session) for later.  The code continues below 
 
 <pre><code>access_token = client.authorize(
   request_token.token,
-  request_token.secret
+  request_token.secret,
+  :oauth_verifier => params[:oauth_verifier]
 )
 
 client.authorized?

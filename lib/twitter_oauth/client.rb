@@ -19,11 +19,11 @@ module TwitterOAuth
       @secret = options[:secret]
     end
   
-    def authorize(token, secret)
+    def authorize(token, secret, options = {})
       request_token = OAuth::RequestToken.new(
         consumer, token, secret
       )
-      @access_token = request_token.get_access_token
+      @access_token = request_token.get_access_token(options)
       @token = @access_token.token
       @secret = @access_token.secret
       @access_token
