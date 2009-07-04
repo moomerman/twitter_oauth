@@ -39,8 +39,8 @@ module TwitterOAuth
       JSON.parse(oauth_response.body)
     end
     
-    def request_token
-      consumer.get_request_token
+    def request_token(options={})
+      consumer.get_request_token(options)
     end
     
     private
