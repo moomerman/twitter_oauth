@@ -1,13 +1,15 @@
 module TwitterOAuth
   class Client
     
-    def friends_ids
-      oauth_response = access_token.get("/friends/ids.json")
+    def friends_ids(options={})
+      args = options.map{|k,v| "#{k}=#{v}"}.join('&')
+      oauth_response = access_token.get("/friends/ids.json?#{args}")
       JSON.parse(oauth_response.body)
     end
     
-    def followers_ids
-      oauth_response = access_token.get("/followers/ids.json")
+    def followers_ids(options={})
+      args = options.map{|k,v| "#{k}=#{v}"}.join('&')
+      oauth_response = access_token.get("/followers/ids.json?#{args}")
       JSON.parse(oauth_response.body)
     end
     

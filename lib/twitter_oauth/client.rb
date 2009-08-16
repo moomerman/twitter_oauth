@@ -1,5 +1,6 @@
+require 'twitter_oauth/timeline'
+require 'twitter_oauth/status'
 require 'twitter_oauth/account'
-require 'twitter_oauth/statuses'
 require 'twitter_oauth/direct_messages'
 require 'twitter_oauth/search'
 require 'twitter_oauth/notifications'
