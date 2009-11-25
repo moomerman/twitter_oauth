@@ -35,6 +35,11 @@ module TwitterOAuth
       oauth_response = access_token.get(url)
       JSON.parse(oauth_response.body)
     end
+
+    def post(url, body = '', headers = {})
+      oauth_response = access_token.post(url, body, headers)
+      JSON.parse(oauth_response.body)
+    end
   
     def show(username)
       get("/users/show/#{username}.json")

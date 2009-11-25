@@ -13,14 +13,12 @@ module TwitterOAuth
     
     # Sends a new direct message to the specified user from the authenticating user.
     def message(user, text)
-      oauth_response = access_token.post('/direct_messages/new.json', :user => user, :text => text)
-      JSON.parse(oauth_response.body)
+      post('/direct_messages/new.json', :user => user, :text => text)
     end
     
     # Destroys the direct message specified in the required ID parameter.
     def message_destroy(id)
-      oauth_response = access_token.post("/direct_messages/destroy/#{id}.json")
-      JSON.parse(oauth_response.body)
+      post("/direct_messages/destroy/#{id}.json")
     end
     
   end

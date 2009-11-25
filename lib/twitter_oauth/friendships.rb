@@ -13,14 +13,12 @@ module TwitterOAuth
     
     # friend this user.
     def friend(id)
-      oauth_response = access_token.post("/friendships/create/#{id}.json")
-      JSON.parse(oauth_response.body)
+      post("/friendships/create/#{id}.json")
     end
     
     # unfriend.
     def unfriend(id)
-      oauth_response = access_token.post("/friendships/destroy/#{id}.json")
-      JSON.parse(oauth_response.body)
+      post("/friendships/destroy/#{id}.json")
     end
     
     # exists?.

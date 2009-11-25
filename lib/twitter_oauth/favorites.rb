@@ -6,13 +6,11 @@ module TwitterOAuth
     end
     
     def favorite
-      oauth_response = access_token.post("/favorites/create/#{id}.json")
-      JSON.parse(oauth_response.body)
+      post("/favorites/create/#{id}.json")
     end
     
     def unfavorite
-      oauth_response = access_token.post("/favorites/destroy/#{id}.json")
-      JSON.parse(oauth_response.body)
+      post("/favorites/destroy/#{id}.json")
     end
     
   end

@@ -8,20 +8,17 @@ module TwitterOAuth
     
     # Updates the authenticating user's status.
     def update(message, options={})
-      oauth_response = access_token.post('/statuses/update.json', options.merge(:status => message))
-      JSON.parse(oauth_response.body)
+      post('/statuses/update.json', options.merge(:status => message))
     end
 
     # Destroys the status specified by the required ID parameter
     def status_destroy(id)
-      oauth_response = access_token.post("/statuses/destroy/#{id}.json")
-      JSON.parse(oauth_response.body)
+      post("/statuses/destroy/#{id}.json")
     end
     
     # Retweets the tweet specified by the id parameter. Returns the original tweet with retweet details embedded.
     def retweet(id)
-      oauth_response = access_token.post("/statuses/retweet/#{id}.json")
-      JSON.parse(oauth_response.body)
+      post("/statuses/retweet/#{id}.json")
     end
     
   end
