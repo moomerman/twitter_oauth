@@ -30,10 +30,14 @@ module TwitterOAuth
       @secret = @access_token.secret
       @access_token
     end
+
+    def get(url)
+      oauth_response = access_token.get(url)
+      JSON.parse(oauth_response.body)
+    end
   
     def show(username)
-      oauth_response = access_token.get("/users/show/#{username}.json")
-      JSON.parse(oauth_response.body)
+      get("/users/show/#{username}.json")
     end
     
     def request_token(options={})

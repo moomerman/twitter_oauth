@@ -10,14 +10,12 @@ module TwitterOAuth
     
     # Returns client info
     def info
-      oauth_response = access_token.get('/account/verify_credentials.json')
-      JSON.parse(oauth_response.body)
+      get('/account/verify_credentials.json')
     end
     
     # Returns the remaining number of API requests available to the requesting user before the API limit is reached for the current hour.
     def rate_limit_status
-      oauth_response = access_token.get('/account/rate_limit_status.json')
-      JSON.parse(oauth_response.body)
+      get('/account/rate_limit_status.json')
     end
     
     # Updates profile background image. Takes a File object and optional tile argument.

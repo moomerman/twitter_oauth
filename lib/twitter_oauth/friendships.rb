@@ -3,14 +3,12 @@ module TwitterOAuth
     
     def friends_ids(options={})
       args = options.map{|k,v| "#{k}=#{v}"}.join('&')
-      oauth_response = access_token.get("/friends/ids.json?#{args}")
-      JSON.parse(oauth_response.body)
+      get("/friends/ids.json?#{args}")
     end
     
     def followers_ids(options={})
       args = options.map{|k,v| "#{k}=#{v}"}.join('&')
-      oauth_response = access_token.get("/followers/ids.json?#{args}")
-      JSON.parse(oauth_response.body)
+      get("/followers/ids.json?#{args}")
     end
     
     # friend this user.

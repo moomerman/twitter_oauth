@@ -3,8 +3,7 @@ module TwitterOAuth
     
     # Returns a single status, specified by the id parameter below.
     def status(id)
-      oauth_response = access_token.get("/statuses/show/#{id}.json")
-      JSON.parse(oauth_response.body)
+      get("/statuses/show/#{id}.json")
     end
     
     # Updates the authenticating user's status.

@@ -3,14 +3,12 @@ module TwitterOAuth
     
     # Returns a list of the 20 most recent direct messages sent to the authenticating user.
     def messages(page=1)
-      oauth_response = access_token.get("/direct_messages.json?page=#{page}")
-      JSON.parse(oauth_response.body)
+      get("/direct_messages.json?page=#{page}")
     end
     
     # Returns a list of the 20 most recent direct messages sent by the authenticating user.
     def sent_messages
-      oauth_response = access_token.get('/direct_messages/sent.json')
-      JSON.parse(oauth_response.body)
+      get('/direct_messages/sent.json')
     end
     
     # Sends a new direct message to the specified user from the authenticating user.

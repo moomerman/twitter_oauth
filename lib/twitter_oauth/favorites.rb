@@ -2,8 +2,7 @@ module TwitterOAuth
   class Client
     
     def favorites(page=1)
-      oauth_response = access_token.get("/favorites.json?page=#{page}")
-      JSON.parse(oauth_response.body)
+      get("/favorites.json?page=#{page}")
     end
     
     def favorite
