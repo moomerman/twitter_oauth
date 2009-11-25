@@ -1,5 +1,3 @@
-require 'rubygems'
-require 'rake'
 require 'rake/testtask'
 require 'shoulda/tasks'
 
