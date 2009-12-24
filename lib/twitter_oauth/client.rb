@@ -9,6 +9,7 @@ require 'twitter_oauth/friendships'
 require 'twitter_oauth/user'
 require 'twitter_oauth/favorites'
 require 'twitter_oauth/utils'
+require 'twitter_oauth/trends'
 
 module TwitterOAuth
   class Client
