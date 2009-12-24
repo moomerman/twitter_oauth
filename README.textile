@@ -1,8 +1,14 @@
 h1. Twitter OAuth REST API client library for Ruby
 
-To make authorized requests with the client library you'll need to [create a Twitter OAuth Application](http://twitter.com/oauth_clients/new).
+h2. Install the gem
 
-See [sinitter](http://github.com/moomerman/sinitter/tree/master) for a full website integration example.
+sudo gem install twitter_oauth # (via gemcutter)
+
+h2. Using the gem
+
+To make authorized requests with the client library you'll need to "create a Twitter OAuth Application":http://twitter.com/oauth_clients/new.
+
+See "sinitter":http://github.com/moomerman/sinitter/tree/master for a full website integration example.
 
 h2. Unauthorized request example
 
@@ -38,7 +44,7 @@ when you set up your application.
     :consumer_secret => 'YOURA_APP_CONSUMER_SECRET'
 )
 request_token = client.request_token(:oauth_callback => oauth_confirm_url)
-#:oauth_callback required for web apps, since oauth gem by default forse PIN-based flow 
+#:oauth_callback required for web apps, since oauth gem by default force PIN-based flow 
 #( see http://groups.google.com/group/twitter-development-talk/browse_thread/thread/472500cfe9e7cdb9/848f834227d3e64d )
 
 
