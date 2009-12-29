@@ -3,8 +3,7 @@ module TwitterOAuth
     
     # Returns the top ten topics that are currently trending on Twitter.
     def trends
-      oauth_response = access_token.get("/trends.json")
-      JSON.parse(oauth_response.body)
+      get("/trends.json")
     end
     
   end
