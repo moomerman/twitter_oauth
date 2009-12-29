@@ -10,6 +10,7 @@ require 'twitter_oauth/user'
 require 'twitter_oauth/favorites'
 require 'twitter_oauth/utils'
 require 'twitter_oauth/trends'
+require 'twitter_oauth/lists'
 
 module TwitterOAuth
   class Client
@@ -38,6 +39,11 @@ module TwitterOAuth
 
     def post(url, body = '', headers = {})
       oauth_response = access_token.post(url, body, headers)
+      JSON.parse(oauth_response.body)
+    end
+  
+    def delete(url)
+      oauth_response = access_token.delete(url)
       JSON.parse(oauth_response.body)
     end
   
