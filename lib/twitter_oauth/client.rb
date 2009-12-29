@@ -31,21 +31,6 @@ module TwitterOAuth
       @secret = @access_token.secret
       @access_token
     end
-
-    def get(url)
-      oauth_response = access_token.get(url)
-      JSON.parse(oauth_response.body)
-    end
-
-    def post(url, body = '', headers = {})
-      oauth_response = access_token.post(url, body, headers)
-      JSON.parse(oauth_response.body)
-    end
-  
-    def delete(url)
-      oauth_response = access_token.delete(url)
-      JSON.parse(oauth_response.body)
-    end
   
     def show(username)
       get("/users/show/#{username}.json")
@@ -71,6 +56,21 @@ module TwitterOAuth
 
       def access_token
         @access_token ||= OAuth::AccessToken.new(consumer, @token, @secret)
+      end
+      
+      def get(url)
+        oauth_response = access_token.get(url)
+        JSON.parse(oauth_response.body)
+      end
+
+      def post(url, body = '', headers = {})
+        oauth_response = access_token.post(url, body, headers)
+        JSON.parse(oauth_response.body)
+      end
+
+      def delete(url)
+        oauth_response = access_token.delete(url)
+        JSON.parse(oauth_response.body)
       end
   end
 end
