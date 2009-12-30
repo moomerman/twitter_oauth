@@ -11,6 +11,8 @@ require 'twitter_oauth/favorites'
 require 'twitter_oauth/utils'
 require 'twitter_oauth/trends'
 require 'twitter_oauth/lists'
+require 'twitter_oauth/saved_searches'
+require 'twitter_oauth/spam'
 
 module TwitterOAuth
   class Client
@@ -34,6 +36,11 @@ module TwitterOAuth
   
     def show(username)
       get("/users/show/#{username}.json")
+    end
+    
+    # Returns the string "ok" in the requested format with a 200 OK HTTP status code.
+    def test
+      get("/help/test.json")
     end
     
     def request_token(options={})
