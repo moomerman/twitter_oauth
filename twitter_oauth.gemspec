@@ -26,6 +26,9 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<oauth>, [">= 0.3.6"])
       s.add_runtime_dependency(%q<json>, [">= 1.1.9"])
       s.add_runtime_dependency(%q<mime-types>, [">= 1.16"])
+      %w(shoulda mocha).each do |dep|
+        s.add_development_dependency dep
+      end
     else
       s.add_dependency(%q<oauth>, [">= 0.3.6"])
       s.add_dependency(%q<json>, [">= 1.1.9"])
