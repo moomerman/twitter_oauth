@@ -1,9 +1,12 @@
 module TwitterOAuth
   class Client
     
-    # Returns a list of the 20 most recent direct messages sent to the authenticating user.
-    def messages(page=1)
-      get("/direct_messages.json?page=#{page}")
+    # Return the most recent direct messages sent to the authenticating user.
+    # By default, returns the last 20. See http://apiwiki.twitter.com/Twitter-REST-API-Method:-direct_messages
+    # for other options
+    def messages(options={})
+      args = options.map{|k,v| "#{k}=#{v}"}.join('&')
+      get("/direct_messages.json?#{args}")
     end
     
     # Returns a list of the 20 most recent direct messages sent by the authenticating user.
