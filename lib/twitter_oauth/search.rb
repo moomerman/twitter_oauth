@@ -5,7 +5,7 @@ module TwitterOAuth
     
     def search(q, options={})
       options[:page] ||= 1
-      options[:per_page] ||= 20
+      options[:rpp] ||= 20
       options[:q] = URI.escape(q)
       args = options.map{|k,v| "#{k}=#{v}"}.join('&')
       search_get("/search.json?#{args}")

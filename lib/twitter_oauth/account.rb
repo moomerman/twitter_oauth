@@ -38,5 +38,10 @@ module TwitterOAuth
       post('/account/update_profile_colors.json', colors)
     end
     
+    # profile hash must contain at least one of :name, :url, :location, :description
+    def update_profile(profile)
+      post('/account/update_profile.json', profile) 
+    end
+    
   end
 end
