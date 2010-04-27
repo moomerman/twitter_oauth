@@ -38,9 +38,15 @@ module TwitterOAuth
       post('/account/update_profile_colors.json', colors)
     end
     
-    # profile hash must contain at least one of :name, :url, :location, :description
-    def update_profile(profile)
-      post('/account/update_profile.json', profile) 
+    # Sets values that users are able to set under the "Account" tab of their settings page.
+    # Valid parameters are:
+    #   :name     Full name associated with the profile. Maximum of 20 characters.
+    #   :url      URL associated with the profile. Will be prepended with "http://" if not present. Maximum of 100 characters.
+    #   :location The city or country describing where the user of the account is located. The contents are not normalized
+    #             or geocoded in any way. Maximum of 30 characters.
+    #   :description A description of the user owning the account. Maximum of 160 characters.
+    def update_profile(params)
+      post('/account/update_profile', params)
     end
     
   end
