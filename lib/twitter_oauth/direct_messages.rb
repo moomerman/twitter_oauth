@@ -9,9 +9,10 @@ module TwitterOAuth
       get("/direct_messages.json?#{args}")
     end
     
-    # Returns a list of the 20 most recent direct messages sent by the authenticating user.
-    def sent_messages
-      get('/direct_messages/sent.json')
+    # By default, returns a list of the 20 most recent direct messages sent by the authenticating user.
+    def sent_messages(options={})
+      args = options.map{|k,v| "#{k}=#{v}"}.join('&')
+      get('/direct_messages/sent.json?#{args}')
     end
     
     # Sends a new direct message to the specified user from the authenticating user.
