@@ -2,14 +2,14 @@
 
 Gem::Specification.new do |s|
   s.name = %q{twitter_oauth}
-  s.version = "0.3.5"
+  s.version = "0.3.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Richard Taylor"]
-  s.date = %q{2010-04-30}
+  s.date = %q{2010-05-06}
   s.description = %q{twitter_oauth is a Ruby library for talking to twitter using the new oauth method.}
   s.email = %q{moomerman@gmail.com}
-  s.files = ["README.textile","lib/twitter_oauth.rb"] + Dir.glob('lib/twitter_oauth/*.rb')
+  s.files = ["LICENSE", "README.textile","lib/twitter_oauth.rb"] + Dir.glob('lib/twitter_oauth/*.rb')
   s.has_rdoc = false
   s.homepage = %q{http://github.com/moomerman/twitter_oauth}
   s.rdoc_options = ["--inline-source", "--charset=UTF-8"]
