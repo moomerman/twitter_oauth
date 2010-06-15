@@ -13,6 +13,7 @@ require 'twitter_oauth/trends'
 require 'twitter_oauth/lists'
 require 'twitter_oauth/saved_searches'
 require 'twitter_oauth/spam'
+require 'twitter_oauth/geo'
 
 module TwitterOAuth
   class Client
@@ -53,11 +54,12 @@ module TwitterOAuth
     end
     
     private
+    
       def consumer
         @consumer ||= OAuth::Consumer.new(
           @consumer_key,
           @consumer_secret,
-          { :site=>"http://twitter.com" }
+          { :site => "http://api.twitter.com" }
         )
       end
 
@@ -65,18 +67,21 @@ module TwitterOAuth
         @access_token ||= OAuth::AccessToken.new(consumer, @token, @secret)
       end
       
-      def get(url)
-        oauth_response = access_token.get(url)
+      def get(path, headers={})
+        headers.merge!("User-Agent" => "twitter_oauth gem v#{TwitterOAuth::VERSION}")
+        oauth_response = access_token.get("/1#{path}", headers)
         JSON.parse(oauth_response.body)
       end
 
-      def post(url, body = '', headers = {})
-        oauth_response = access_token.post(url, body, headers)
+      def post(path, body='', headers={})
+        headers.merge!("User-Agent" => "twitter_oauth gem v#{TwitterOAuth::VERSION}")
+        oauth_response = access_token.post("/1#{path}", body, headers)
         JSON.parse(oauth_response.body)
       end
 
-      def delete(url)
-        oauth_response = access_token.delete(url)
+      def delete(path, headers={})
+        headers.merge!("User-Agent" => "twitter_oauth gem v#{TwitterOAuth::VERSION}")
+        oauth_response = access_token.delete("/1#{path}", headers)
         JSON.parse(oauth_response.body)
       end
   end
