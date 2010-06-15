@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Richard Taylor"]
-  s.date = %q{2010-05-06}
-  s.description = %q{twitter_oauth is a Ruby library for talking to twitter using the new oauth method.}
+  s.date = %q{2010-06-15}
+  s.description = %q{twitter_oauth is a Ruby client for the Twitter API using OAuth.}
   s.email = %q{moomerman@gmail.com}
   s.files = ["LICENSE", "README.textile","lib/twitter_oauth.rb"] + Dir.glob('lib/twitter_oauth/*.rb')
   s.has_rdoc = false
@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{twitter_oauth}
   s.rubygems_version = %q{1.3.1}
-  s.summary = %q{twitter_oauth is a Ruby library for talking to twitter using the new oauth method.}
+  s.summary = %q{twitter_oauth is a Ruby client for the Twitter API using OAuth.}
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
