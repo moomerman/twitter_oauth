@@ -87,7 +87,7 @@ Services such as "Apigee Analytics and API Management":http://apigee.com/ requir
 
 First you need to authorize the Twitter user via OAuth directly via the Twitter API (this part cannot be proxied)
 
-pre><code>client = TwitterOAuth::Client.new(
+<pre><code>client = TwitterOAuth::Client.new(
     :consumer_key => 'YOUR_APP_CONSUMER_KEY',
     :consumer_secret => 'YOURA_APP_CONSUMER_SECRET'
 )
