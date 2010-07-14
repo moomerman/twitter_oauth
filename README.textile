@@ -80,3 +80,48 @@ client = TwitterOAuth::Client.new(
 client.authorized?
 => true
 </code></pre>
+
+h2. Working with a Proxy
+
+Services such as "Apigee Analytics and API Management":http://apigee.com/ require you to proxy your API requests through their servers.  The workflow is as follows.
+
+First you need to authorize the Twitter user via OAuth directly via the Twitter API (this part cannot be proxied)
+
+pre><code>client = TwitterOAuth::Client.new(
+    :consumer_key => 'YOUR_APP_CONSUMER_KEY',
+    :consumer_secret => 'YOURA_APP_CONSUMER_SECRET'
+)
+request_token = client.request_token(:oauth_callback => 'YOUR_CALLBACK_URL')
+
+request_token.authorize_url
+=> http://twitter.com/oauth/authorize?oauth_token=TOKEN
+</code></pre>
+
+The user is sent to Twitter to allow the application to access their account and then you need to obtain the access token for the user
+
+<pre><code>access_token = client.authorize(
+  request_token.token,
+  request_token.secret,
+  :oauth_verifier => params[:oauth_verifier]
+)
+
+client.authorized?
+=> true
+</code></pre>
+
+Now you can make all further API calls through the proxy of your choice:
+
+<pre><code>access_token = @user.access_token # assuming @user
+client = TwitterOAuth::Client.new(
+    :proxy => 'http://XXX.YYY.apigee.com',
+    :consumer_key => 'YOUR_CONSUMER_KEY',
+    :consumer_secret => 'YOUR-CONSUMER-SECRET',
+    :token => access_token.token, 
+    :secret => access_token.secret
+)
+
+client.authorized?
+=> true
+
+client.update('Proxy via Apigee is working')
+</code></pre>
