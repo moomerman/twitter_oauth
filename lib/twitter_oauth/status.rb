@@ -21,5 +21,10 @@ module TwitterOAuth
       post("/statuses/retweet/#{id}.json")
     end
     
+    # Returns the 100 most recent retweets of the tweet.
+    def retweets(id)
+      get("/statuses/retweets/#{id}.json")
+    end
+    
   end
 end
