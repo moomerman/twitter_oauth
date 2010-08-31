@@ -48,6 +48,30 @@ module TwitterOAuth
     def update_profile(params)
       post('/account/update_profile', params)
     end
+
+    # Obtains OAuth access for a given username/password.
+    # Returns a hash containing oauth_token, oauth_token_secret, x_auth_expires, user_id, and screen_name if authentication succeeds.
+    # Returns a 401 status code and error message if authentication fails OR if the given application does not have access to the xAuth endpoint.
+    # Refer to http://dev.twitter.com/pages/xauth for information about xAuth access.
+    def x_auth(username, password, resource = 'https://api.twitter.com/oauth/access_token')
+      response = consumer.request(:post, resource, nil, {}, :x_auth_mode => 'client_auth', :x_auth_username => username, :x_auth_password => password)
+
+      case response.code.to_i
+      when (200..299)
+        # return hash of response
+        response.body.split('&').inject({}) do |hash,pair|
+          key, value = pair.split("=").map{|v| CGI::unescape(v)}
+          hash[key] = value
+          hash
+        end
+      when (400..499)
+        # Unauthorized
+        raise OAuth::Unauthorized, response
+      else
+        # Everything else, including redirects, should error.
+        response.error!
+      end
+    end
     
   end
 end
