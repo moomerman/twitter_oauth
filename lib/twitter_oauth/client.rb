@@ -40,6 +40,12 @@ module TwitterOAuth
       get("/users/show/#{username}.json")
     end
     
+    def lookup(options={})
+      raise ArgumentError, "No usernames or user ids specified" if options[:screen_name].nil? and options[:user_id].nil?      
+      params = options.inject([]) {|memo, (k,v)| memo << "#{k}=#{v.join(',')}"}.join('&')
+      get("/users/lookup.json?#{params}")
+    end
+    
     # Returns the string "ok" in the requested format with a 200 OK HTTP status code.
     def test
       get("/help/test.json")
