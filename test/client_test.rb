@@ -1,3 +1,4 @@
+$LOAD_PATH.unshift ENV["PWD"]
 require File.join(File.dirname(__FILE__), "/test_helper")
 
 class ClientTest < Test::Unit::TestCase
