@@ -19,7 +19,7 @@ module TwitterOAuth
     # This information is cached for five minutes, and therefore users are discouraged from querying these endpoints 
     # faster than once every five minutes.  Global trends information is also available from this API by using a WOEID of 1.
     def trends_for_location(woeid)
-      get("/trends/woeid.json")
+      get("/trends/#{woeid}.json")
     end
   end
 end
