@@ -28,7 +28,7 @@ module TwitterOAuth
     
     private
       def search_get(path)
-        response = open('http://search.twitter.com' + path, 'User-Agent' => 'github.com/moomerman/twitter_outh')
+        response = open(@search_site + path, 'User-Agent' => 'github.com/moomerman/twitter_outh')
         JSON.parse(response.read)
       end
   end
