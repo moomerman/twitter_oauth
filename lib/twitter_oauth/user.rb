@@ -22,7 +22,7 @@ module TwitterOAuth
         json = post("/users/lookup.json", parameter => user_batch.join(','))
 
         # Raise errors
-        raise "#{json['request']}: #{json['error']}" if json['error']
+        raise "#{json['request']}: #{json['error']}" if json.is_a?(Hash) && json['error']
 
         friends += json
       end
