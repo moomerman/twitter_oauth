@@ -11,6 +11,11 @@ module TwitterOAuth
       post('/statuses/update.json', options.merge(:status => message))
     end
 
+    # Updates the authenticating user's status with media.
+    def update_with_media(message, options={})
+      post('/statuses/update_with_media.json', options.merge(:status => message))
+    end
+
     # Destroys the status specified by the required ID parameter
     def status_destroy(id)
       post("/statuses/destroy/#{id}.json")
