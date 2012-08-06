@@ -13,6 +13,11 @@ module TwitterOAuth
       get('/account/verify_credentials.json')
     end
     
+    # Returns totals info
+    def totals
+      get('/account/totals.json')
+    end
+    
     # Returns the remaining number of API requests available to the requesting user before the API limit is reached for the current hour.
     def rate_limit_status
       get('/account/rate_limit_status.json')
