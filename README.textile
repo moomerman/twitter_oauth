@@ -87,7 +87,7 @@ h2. PIN-based flow
 
 If you're writing a command line application or desktop app, you will probably want to use the PIN-based authorization method rather than the website redirect method.
 
-<code><pre>client = TwitterOAuth::Client.new(
+<pre><code>client = TwitterOAuth::Client.new(
   :consumer_key => 'YOUR_CONSUMER_KEY',
   :consumer_secret => 'YOUR_APP_CONSUMER_SECRET'
 )
@@ -109,7 +109,7 @@ access_token = client.authorize(
 
 client.authorized?
 => true
-</pre></code>
+</code></pre>
 
 The special oauth callback value of <code>oob</code> tells Twitter you want to do the PIN-based authentication.  The user goes to the authorization URL to get their unique code and they paste that into your application.  Finally we authorize the user with this code.
 
