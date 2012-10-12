@@ -76,19 +76,27 @@ module TwitterOAuth
       def get(path, headers={})
         headers.merge!("User-Agent" => "twitter_oauth gem v#{TwitterOAuth::VERSION}")
         oauth_response = access_token.get("/#{@api_version}#{path}", headers)
-        JSON.parse(oauth_response.body)
+        parse(oauth_response.body)
       end
 
       def post(path, body='', headers={})
         headers.merge!("User-Agent" => "twitter_oauth gem v#{TwitterOAuth::VERSION}")
         oauth_response = access_token.post("/#{@api_version}#{path}", body, headers)
-        JSON.parse(oauth_response.body)
+        parse(oauth_response.body)
       end
 
       def delete(path, headers={})
         headers.merge!("User-Agent" => "twitter_oauth gem v#{TwitterOAuth::VERSION}")
         oauth_response = access_token.delete("/#{@api_version}#{path}", headers)
-        JSON.parse(oauth_response.body)
+        parse(oauth_response.body)
+      end
+
+      def parse(response_body)
+        begin
+          JSON.parse(response_body)
+        rescue JSON::ParserError
+          {:response => response_body}.to_json
+        end
       end
   end
 end
