@@ -24,6 +24,9 @@ module TwitterOAuth
       @token = options[:token]
       @secret = options[:secret]
       @proxy = options[:proxy]
+      @site = options[:site] || 'http://api.twitter.com'
+      @search_site = options[:search_site] || 'http://search.twitter.com'
+      @api_version_path = options[:api_version_path] || '/1'
     end
   
     def authorize(token, secret, options = {})
@@ -60,7 +63,7 @@ module TwitterOAuth
         @consumer ||= OAuth::Consumer.new(
           @consumer_key,
           @consumer_secret,
-          { :site => 'http://api.twitter.com', :request_endpoint => @proxy }
+          { :site => @site, :request_endpoint => @proxy }
         )
       end
 
@@ -70,19 +73,19 @@ module TwitterOAuth
       
       def get(path, headers={})
         headers.merge!("User-Agent" => "twitter_oauth gem v#{TwitterOAuth::VERSION}")
-        oauth_response = access_token.get("/1#{path}", headers)
+        oauth_response = access_token.get("#{@api_version_path}#{path}", headers)
         JSON.parse(oauth_response.body)
       end
 
       def post(path, body='', headers={})
         headers.merge!("User-Agent" => "twitter_oauth gem v#{TwitterOAuth::VERSION}")
-        oauth_response = access_token.post("/1#{path}", body, headers)
+        oauth_response = access_token.post("#{@api_version_path}#{path}", body, headers)
         JSON.parse(oauth_response.body)
       end
 
       def delete(path, headers={})
         headers.merge!("User-Agent" => "twitter_oauth gem v#{TwitterOAuth::VERSION}")
-        oauth_response = access_token.delete("/1#{path}", headers)
+        oauth_response = access_token.delete("#{@api_version_path}#{path}", headers)
         JSON.parse(oauth_response.body)
       end
   end
