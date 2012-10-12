@@ -24,6 +24,7 @@ module TwitterOAuth
       @token = options[:token]
       @secret = options[:secret]
       @proxy = options[:proxy]
+      @http_proxy = options[:http_proxy]
     end
   
     def authorize(token, secret, options = {})
@@ -57,10 +58,12 @@ module TwitterOAuth
     private
     
       def consumer
+        options = { :site => 'http://api.twitter.com', :request_endpoint => @proxy }
+        options.merge({ :proxy => @http_proxy }) if not @http_proxy.nil?
         @consumer ||= OAuth::Consumer.new(
           @consumer_key,
           @consumer_secret,
-          { :site => 'http://api.twitter.com', :request_endpoint => @proxy }
+          options
         )
       end
 
