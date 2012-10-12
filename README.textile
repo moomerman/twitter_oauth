@@ -41,7 +41,7 @@ when you set up your application.
 
 <pre><code>client = TwitterOAuth::Client.new(
     :consumer_key => 'YOUR_APP_CONSUMER_KEY',
-    :consumer_secret => 'YOURA_APP_CONSUMER_SECRET'
+    :consumer_secret => 'YOUR_APP_CONSUMER_SECRET'
 )
 request_token = client.request_token(:oauth_callback => oauth_confirm_url)
 #:oauth_callback required for web apps, since oauth gem by default force PIN-based flow
@@ -52,10 +52,10 @@ request_token.authorize_url
 => http://twitter.com/oauth/authorize?oauth_token=TOKEN
 </code></pre>
 
-NOTE: above we called the client.request_token(...) method, this authorizes the application on every call.  You can also use the <code>client.authentication_request_token(...)</code> method which automatically redirects back to your application if the user has previously authorized the app.
-
 In your application your user would be redirected to Twitter to authorize the application at this point.  You'll need to store
 the request token (usually in the session) for later.  The code continues below assuming the user has authorized your application.
+
+NOTE: Above we called the <code>client.request_token(...)</code> method, this authorizes the application on every call.  You can also use the <code>client.authentication_request_token(...)</code> method which automatically redirects back to your application if the user has previously authorized the app.
 
 <pre><code>access_token = client.authorize(
   request_token.token,
@@ -74,7 +74,7 @@ Now if you keep hold of the access_token (usually in the database) for this user
 <pre><code>access_token = @user.access_token # assuming @user
 client = TwitterOAuth::Client.new(
     :consumer_key => 'YOUR_CONSUMER_KEY',
-    :consumer_secret => 'YOUR-CONSUMER-SECRET',
+    :consumer_secret => 'YOUR_APP_CONSUMER_SECRET',
     :token => access_token.token,
     :secret => access_token.secret
 )
@@ -82,6 +82,36 @@ client = TwitterOAuth::Client.new(
 client.authorized?
 => true
 </code></pre>
+
+h2. PIN-based flow
+
+If you're writing a command line application or desktop app, you will probably want to use the PIN-based authorization method rather than the website redirect method.
+
+<code><pre>client = TwitterOAuth::Client.new(
+  :consumer_key => 'YOUR_CONSUMER_KEY',
+  :consumer_secret => 'YOUR_APP_CONSUMER_SECRET'
+)
+
+request_token = client.authentication_request_token(
+  :oauth_callback => 'oob'
+)
+
+puts request_token.authorize_url
+
+print 'Please visit the URL and enter the code: '
+code = gets.strip
+
+access_token = client.authorize(
+  request_token.token,
+  request_token.secret,
+  :oauth_verifier => code
+)
+
+client.authorized?
+=> true
+</pre></code>
+
+The special oauth callback value of <code>oob</code> tells Twitter you want to do the PIN-based authentication.  The user goes to the authorization URL to get their unique code and they paste that into your application.  Finally we authorize the user with this code.
 
 h2. Working with a Proxy
 
