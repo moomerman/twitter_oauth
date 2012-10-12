@@ -27,6 +27,7 @@ module TwitterOAuth
       @debug = options[:debug]
       @api_version = options[:api_version] || '1'
       @api_host = options[:api_host] || 'api.twitter.com'
+      @search_host = options[:search_host] || 'search.twitter.com'
     end
 
     def authorize(token, secret, options = {})
