@@ -2,15 +2,35 @@ module TwitterOAuth
   class Client
     
     # Returns an array of numeric IDs for every user the specified user is following.
-    def friends_ids(options={})
-      args = options.map{|k,v| "#{k}=#{v}"}.join('&')
-      get("/friends/ids.json?#{args}")
+    def friends_ids
+      user_ids = []
+      cursor = '-1'
+      while cursor != 0 do
+        json = get("/friends/ids.json?cursor=#{cursor}")
+        cursor = json['next_cursor']
+
+        # Raise errors
+        raise "#{json['request']}: #{json['error']}" if json['error']
+
+        user_ids += json['ids'] if json['ids']
+      end
+      user_ids
     end
     
     # Returns an array of numeric IDs for every user following the specified user.
-    def followers_ids(options={})
-      args = options.map{|k,v| "#{k}=#{v}"}.join('&')
-      get("/followers/ids.json?#{args}")
+    def followers_ids
+      user_ids = []
+      cursor = '-1'
+      while cursor != 0 do
+        json = get("/followers/ids.json?cursor=#{cursor}")
+        cursor = json['next_cursor']
+
+        # Raise errors
+        raise "#{json['request']}: #{json['error']}" if json['error']
+
+        user_ids += json['ids'] if json['ids']
+      end
+      user_ids
     end
     
     # Allows the authenticating user to follow the specified user. Returns the befriended user when successful.
