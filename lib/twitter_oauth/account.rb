@@ -15,12 +15,12 @@ module TwitterOAuth
 
     # Returns totals info (followers, updates, friends, favorites)
     def totals
-      get('/account/totals.json')
+      raise TwitterDeprecatedError
     end
 
     # Returns the remaining number of API requests available to the requesting user before the API limit is reached for the current hour.
     def rate_limit_status
-      get('/account/rate_limit_status.json')
+      get('/application/rate_limit_status.json')
     end
 
     # Updates profile background image. Takes a File object and optional tile argument.

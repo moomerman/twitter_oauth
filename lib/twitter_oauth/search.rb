@@ -4,32 +4,25 @@ module TwitterOAuth
   class Client
 
     def search(q, options={})
-      options[:page] ||= 1
-      options[:rpp] ||= 20
       options[:q] = URI.escape(q)
       args = options.map{|k,v| "#{k}=#{v}"}.join('&')
-      search_get("/search.json?#{args}")
+      get("/search/tweets.json?#{args}")
     end
 
     # Returns the current top 10 trending topics on Twitter.
-    def current_trends
-      search_get("/trends/current.json")
+    def current_trends(woe_id = 1)
+      get("/trends/place.json?id=#{woe_id}")
     end
 
     # Returns the top 20 trending topics for each hour in a given day.
     def daily_trends
-      search_get("/trends/daily.json")
+      raise TwitterDeprecatedError
     end
 
     # Returns the top 30 trending topics for each day in a given week.
     def weekly_trends
-      search_get("/trends/weekly.json")
+      raise TwitterDeprecatedError
     end
 
-    private
-      def search_get(path)
-        response = open("http://#{@search_host}" + path, 'User-Agent' => "twitter_oauth gem v#{TwitterOAuth::VERSION}")
-        JSON.parse(response.read)
-      end
   end
 end
