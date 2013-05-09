@@ -113,7 +113,7 @@ module TwitterOAuth
         resp["errors"].each do |error|
           raise TwitterRateLimitExceededError if error["code"] == 88
         end
-        raise TwitterUnknownError
+        raise TwitterUnknownError.new(resp["errors"])
       end
     end
   end
