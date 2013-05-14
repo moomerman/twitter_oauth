@@ -112,6 +112,7 @@ module TwitterOAuth
       if resp.is_a?(Hash) && resp["errors"]
         resp["errors"].each do |error|
           raise TwitterRateLimitExceededError if error["code"] == 88
+          raise TwitterDuplicateMessageError if error["code"] == 187
         end
         raise TwitterUnknownError.new(resp["errors"])
       end

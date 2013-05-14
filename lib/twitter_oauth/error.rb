@@ -5,6 +5,9 @@ module TwitterOAuth
   class TwitterRateLimitExceededError < RuntimeError
   end
 
+  class TwitterDuplicateMessageError < RuntimeError
+  end
+
   class TwitterUnknownError < RuntimeError
   end
 end
