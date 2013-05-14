@@ -113,6 +113,7 @@ module TwitterOAuth
         resp["errors"].each do |error|
           raise TwitterRateLimitExceededError if error["code"] == 88
           raise TwitterDuplicateMessageError if error["code"] == 187
+          raise TwitterRegionNotFound if error["code"] == 34
         end
         raise TwitterUnknownError.new(resp["errors"])
       end

@@ -10,4 +10,7 @@ module TwitterOAuth
 
   class TwitterUnknownError < RuntimeError
   end
+
+  class TwitterRegionNotFound < RuntimeError
+  end
 end
