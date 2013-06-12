@@ -5,5 +5,5 @@ require 'mime/types'
 require 'twitter_oauth/client'
 
 module TwitterOAuth
-  VERSION = '0.4.9'
+  VERSION = '0.4.91'
 end
