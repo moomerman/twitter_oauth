@@ -30,7 +30,7 @@ module TwitterOAuth
     # Returns the 20 most recent @replies (status updates prefixed with @username) for the authenticating user.
     def mentions(options={})
       args = options.map{|k,v| "#{k}=#{v}"}.join('&')
-      get("/statuses/mentions.json?#{args}")
+      get("/statuses/mentions_timeline.json?#{args}")
     end
     alias :replies :mentions
     
