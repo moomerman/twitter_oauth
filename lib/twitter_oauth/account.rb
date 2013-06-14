@@ -9,6 +9,10 @@ module TwitterOAuth
       return oauth_response.class == Net::HTTPOK
     end
 
+    def info
+      get('/account/verify_credentials.json')
+    end
+
     # Updates profile background image. Takes a File object and optional tile argument.
     # Returns extended user info object.
     def update_profile_background_image(image, tile = false)
