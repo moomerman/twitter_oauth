@@ -77,7 +77,7 @@ module TwitterOAuth
       def post(path, body='', headers={})
         puts "[Client] POST #{path}" if @debug
         headers.merge!("User-Agent" => "twitter_oauth gem v#{TwitterOAuth::VERSION}")
-        headers.merge!("Content-Type: application/x-www-form-urlencoded\r\n")
+        headers.merge!("Content-Type" => "application/x-www-form-urlencoded\r\n")
         oauth_response = access_token.post("/#{@api_version}#{path}", body, headers)
         parse(oauth_response.body)
       end
