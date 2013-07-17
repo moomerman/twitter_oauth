@@ -13,4 +13,7 @@ module TwitterOAuth
 
   class TwitterRegionNotFound < RuntimeError
   end
+
+  class TwitterAccessTokenExpired < RuntimeError
+  end
 end
