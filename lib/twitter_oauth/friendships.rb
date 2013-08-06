@@ -15,12 +15,12 @@ module TwitterOAuth
 
     # Allows the authenticating user to follow the specified user. Returns the befriended user when successful.
     def friend(id)
-      post("/friendships/create/#{id}.json")
+      post("/friendships/create.json?user_id=#{id}&follow=true")
     end
 
     # Allows the authenticating users to unfollow the specified user. Returns the unfollowed user when successful.
     def unfriend(id)
-      post("/friendships/destroy/#{id}.json")
+      post("/friendships/destroy.json?user_id=#{id}")
     end
 
     # Tests for the existence of friendship between two users. Will return true if user_a follows user_b, otherwise will return false.
