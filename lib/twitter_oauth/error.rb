@@ -16,4 +16,7 @@ module TwitterOAuth
 
   class TwitterAccessTokenExpired < RuntimeError
   end
+
+  class TwitterBadTokenError < RuntimeError
+  end
 end

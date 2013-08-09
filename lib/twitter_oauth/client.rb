@@ -115,6 +115,7 @@ module TwitterOAuth
           raise TwitterDuplicateMessageError if error["code"] == 187
           raise TwitterRegionNotFound if error["code"] == 34
           raise TwitterAccessTokenExpired if error['code'] == 89
+          raise TwitterBadTokenError if error['code'] == 32
         end
         raise TwitterUnknownError.new(resp["errors"])
       end
