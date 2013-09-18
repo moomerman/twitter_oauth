@@ -1,3 +1,5 @@
+#coding: utf-8
+
 require 'twitter_oauth/timeline'
 require 'twitter_oauth/status'
 require 'twitter_oauth/account'
@@ -77,7 +79,10 @@ module TwitterOAuth
       def post(path, body='', headers={})
         puts "[Client] POST #{path}" if @debug
         headers.merge!("User-Agent" => "twitter_oauth gem v#{TwitterOAuth::VERSION}")
-        headers.merge!("Content-Type" => "application/x-www-form-urlencoded\r\n")
+        if !headers.has_key? "Content-Type"
+          headers.merge!("Content-Type" => "application/x-www-form-urlencoded\r\n")
+        end
+
         oauth_response = access_token.post("/#{@api_version}#{path}", body, headers)
         parse(oauth_response.body)
       end

@@ -12,7 +12,7 @@ module TwitterOAuth
         
         headers["Content-Type"] = "multipart/form-data; boundary=#{boundary}"
         params.each do |key,value|
-          esc_key = OAuth::Helper.escape(key.to_s)
+          esc_key = key.to_s
           body <<  "--#{boundary}#{CRLF}"
           
           if value.respond_to?(:read)
