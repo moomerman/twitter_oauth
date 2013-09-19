@@ -10,5 +10,9 @@ module TwitterOAuth
       get('/application/rate_limit_status.json')
     end
 
+    def configuration
+      get('/help/configuration.json')
+    end
+
   end
 end
