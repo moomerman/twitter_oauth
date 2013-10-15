@@ -15,7 +15,7 @@ module TwitterOAuth
 
     # Allows the authenticating user to follow the specified user. Returns the befriended user when successful.
     def friend(id)
-      post("/friendships/create/#{id}.json")
+      post("/friendships/create.json", {:user_id => id, :follow => true})
     end
 
     # Allows the authenticating users to unfollow the specified user. Returns the unfollowed user when successful.
