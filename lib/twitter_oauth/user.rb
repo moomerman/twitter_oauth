@@ -20,6 +20,14 @@ module TwitterOAuth
     def verify_credentials
       get('/account/verify_credentials.json')
     end
+    
+    # Search for users
+    def users_search(q, options={})
+      options[:count] ||= 20
+      options[:q] = URI.escape(q)
+      args = options.map{|k,v| "#{k}=#{v}"}.join('&')
+      get("/users/search.json?#{args}")
+    end
 
   end
 end
