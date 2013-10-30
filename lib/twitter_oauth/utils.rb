@@ -21,11 +21,11 @@ module TwitterOAuth
             body << "Content-Type: #{mime_type.simplified}#{CRLF*2}"
             body << value.read
           else
-            body << "Content-Disposition: form-data; name=\"#{esc_key}\"#{CRLF*2}#{value}"
+            body << "Content-Disposition: form-data; name=\"#{esc_key}\"#{CRLF*2}#{value}#{CRLF}"
           end
         end
         
-        body << "--#{boundary}--#{CRLF*2}"
+        body << "#{CRLF}--#{boundary}--#{CRLF*2}"
         headers["Content-Length"] = body.size.to_s
         
         return [ body, headers ]

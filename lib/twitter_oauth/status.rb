@@ -12,7 +12,7 @@ module TwitterOAuth
     end
 
     def update_with_media(message, media)
-      body, headers = http_multipart_data({'media[]' => media, :status => message})
+      body, headers = http_multipart_data({:status => message, 'media[]' => media})
       post('/statuses/update_with_media.json', body, headers)
     end
 
