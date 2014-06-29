@@ -110,7 +110,7 @@ First you need to authorize the Twitter user via OAuth directly via the Twitter 
 
 <pre><code>client = TwitterOAuth::Client.new(
     :consumer_key => 'YOUR_APP_CONSUMER_KEY',
-    :consumer_secret => 'YOURA_APP_CONSUMER_SECRET'
+    :consumer_secret => 'YOUR_APP_CONSUMER_SECRET'
 )
 request_token = client.request_token(:oauth_callback => 'YOUR_CALLBACK_URL')
 
