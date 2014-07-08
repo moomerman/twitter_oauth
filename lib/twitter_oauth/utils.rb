@@ -12,7 +12,7 @@ module TwitterOAuth
         
         headers["Content-Type"] = "multipart/form-data; boundary=#{boundary}"
         params.each do |key,value|
-          esc_key = OAuth::Helper.escape(key.to_s)
+          esc_key = key.to_s
           body <<  "--#{boundary}#{CRLF}"
           
           if value.respond_to?(:read)
@@ -21,11 +21,11 @@ module TwitterOAuth
             body << "Content-Type: #{mime_type.simplified}#{CRLF*2}"
             body << value.read
           else
-            body << "Content-Disposition: form-data; name=\"#{esc_key}\"#{CRLF*2}#{value}"
+            body << "Content-Disposition: form-data; name=\"#{esc_key}\"#{CRLF*2}#{value}#{CRLF}"
           end
         end
         
-        body << "--#{boundary}--#{CRLF*2}"
+        body << "#{CRLF}--#{boundary}--#{CRLF*2}"
         headers["Content-Length"] = body.size.to_s
         
         return [ body, headers ]
