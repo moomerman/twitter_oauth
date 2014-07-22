@@ -9,13 +9,13 @@ module TwitterOAuth
     # Favorites the status specified in the ID parameter as the authenticating user. 
     # Returns the favorite status when successful.
     def favorite(id)
-      post("/favorites/create/#{id}.json")
+      post("/favorites/create.json?id=#{id}")
     end
     
     # Un-favorites the status specified in the ID parameter as the authenticating user. 
     # Returns the un-favorited status when successful.
     def unfavorite(id)
-      post("/favorites/destroy/#{id}.json")
+      post("/favorites/destroy.json?id=#{id}")
     end
     
   end
