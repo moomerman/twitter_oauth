@@ -15,5 +15,9 @@ module TwitterOAuth
       get('/account/verify_credentials.json')
     end
 
+    def users_lookup(users)
+      get("/users/lookup.json?user_id=#{users.join(',')}")
+    end
+
   end
 end
