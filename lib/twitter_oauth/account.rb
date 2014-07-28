@@ -41,7 +41,7 @@ module TwitterOAuth
     #             or geocoded in any way. Maximum of 30 characters.
     #   :description A description of the user owning the account. Maximum of 160 characters.
     def update_profile(params)
-      post('/account/update_profile', params)
+      post('/account/update_profile.json', params)
     end
 
   end
